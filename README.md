@@ -30,14 +30,18 @@ The skill is installable in three ways, depending on which agent or IDE you use.
 
 Works with **any** agent that follows the [open SKILL.md convention](https://github.com/vercel-labs/skills) (Claude Code, Cursor, Cline, Continue, Codex, and more):
 
+**Install for all detected agents in the current project**
 ```bash
-# Install for all detected agents in the current project
 npx skills add darlanrod/material-design-md
+```
 
-# Install for a specific agent
+**I nstall for a specific agent**
+```bash
 npx skills add darlanrod/material-design-md -a claude-code
+```
 
-# Install globally (available across all projects)
+**Install globally (available across all projects)**
+```bash
 npx skills add darlanrod/material-design-md --global
 ```
 
@@ -45,6 +49,8 @@ Equivalent CLIs in the same ecosystem also work:
 
 ```bash
 npx add-skill darlanrod/material-design-md
+```
+```bash
 npx clawhub@latest install darlanrod/material-design-md
 ```
 
@@ -151,28 +157,6 @@ The agent reads the generated tokens, then writes brand-aligned prose for each s
 - [`references/prose-guide.md`](./references/prose-guide.md) — section-by-section writing rubric; this is the single highest-leverage reference for output quality.
 
 Result: tokens are correct and consistent across projects; prose is grounded in *this* brand.
-
----
-
-## Project structure
-
-```
-material-design-md/
-├── SKILL.md                          # The skill: instructions for the agent
-├── README.md                         # This file
-├── CONTRIBUTING.md                   # How to develop, test, and submit changes
-├── LICENSE                           # MPL-2.0
-├── references/
-│   ├── spec.md                       # DESIGN.md spec excerpt
-│   ├── material-design-3.md          # M3 token guidance
-│   └── prose-guide.md                # Section-by-section writing rubric
-├── assets/
-│   └── example-design.md             # Complete reference output (Bossa)
-└── scripts/
-    ├── generate_design_tokens.py     # Python token generator
-    ├── generate_design_tokens.js     # Node.js token generator (same CLI)
-    └── package.json
-```
 
 ---
 
