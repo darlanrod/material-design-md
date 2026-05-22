@@ -60,11 +60,14 @@ If a section runs short because the brand is genuinely minimal there, leave it s
 - The image style (the user's image style phrase, in context).
 - A subtle commitment: dense vs spacious, conservative vs expressive, restrained vs maximal.
 
-**Should also include** (as a bullet list or short paragraph):
+**Must also include** the following four-bullet block at the end of the Overview. This is a canonical pattern — every DESIGN.md should carry it, even if the prose above already covered image style. The bullets serve as a "quick reference card" for an agent scanning the document; they should appear in this exact order:
 
-- Main color scheme: light/dark.
-- Design framework: Material Design 3.
-- Iconography: Material Symbols (the M3 default).
+- **Main color scheme:** Light or Dark (the value used in `colors:`).
+- **Design framework:** Material Design 3.
+- **Iconography:** Material Symbols, with the variant the brand uses (Rounded / Sharp / Outlined / Filled). Default is Rounded.
+- **Image style:** A one-line restatement of the user's image-style phrase. Do not omit this even when the prose above mentions it — the bullet acts as a structured anchor.
+
+If the user did not provide image-style input, ask before generating. Don't invent it.
 
 **Example pattern:**
 
@@ -73,6 +76,7 @@ If a section runs short because the brand is genuinely minimal there, leave it s
 > - **Main color scheme:** Dark
 > - **Design framework:** Material Design 3
 > - **Iconography:** Material Symbols, Rounded
+> - **Image style:** Documentary photography with visible grain, natural light, off-center compositions
 
 ### 2. Colors
 

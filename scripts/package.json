@@ -1,6 +1,6 @@
 {
   "name": "material-design-md-tokens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Deterministic Material Design 3 token generator for the YAML frontmatter of a DESIGN.md file. Part of the material-design-md skill.",
   "private": true,
   "bin": {

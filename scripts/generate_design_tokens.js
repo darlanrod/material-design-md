@@ -90,6 +90,17 @@ const TYPE_SCALE = {
   'label-small': [-3, 500, 1.4, false],
 };
 
+// Interactive-state convention follows Material 3:
+//   - hover/pressed apply a state layer (translucent overlay color) over the
+//     base background — emitted as `stateLayer` + `stateLayerOpacity` (%).
+//     M3: hover = 8%, pressed = 10%, focus = 10%, dragged = 16%.
+//   - disabled uses `backgroundOpacity: 12%` and `textOpacity: 38%` on
+//     `onSurface`, the M3-standard "out of play" appearance.
+//   - inputs add `outlineColor` + `outlineWidth` that vary across states.
+//
+// These extra properties are non-normative per the DESIGN.md spec (unknown
+// component properties are accepted with warning) but match M3 conventions
+// so any M3-aware downstream tool can apply them.
 function buildComponentTokens() {
   return {
     'button-primary': {
@@ -103,14 +114,20 @@ function buildComponentTokens() {
     'button-primary-hover': {
       backgroundColor: '{colors.primary}',
       textColor: '{colors.onPrimary}',
+      stateLayer: '{colors.onPrimary}',
+      stateLayerOpacity: '8%',
     },
     'button-primary-pressed': {
       backgroundColor: '{colors.primary}',
       textColor: '{colors.onPrimary}',
+      stateLayer: '{colors.onPrimary}',
+      stateLayerOpacity: '10%',
     },
     'button-primary-disabled': {
       backgroundColor: '{colors.onSurface}',
+      backgroundOpacity: '12%',
       textColor: '{colors.onSurface}',
+      textOpacity: '38%',
     },
     'button-secondary': {
       backgroundColor: '{colors.secondaryContainer}',
@@ -120,6 +137,12 @@ function buildComponentTokens() {
       padding: '{spacing.md}',
       height: '40px',
     },
+    'button-secondary-hover': {
+      backgroundColor: '{colors.secondaryContainer}',
+      textColor: '{colors.onSecondaryContainer}',
+      stateLayer: '{colors.onSecondaryContainer}',
+      stateLayerOpacity: '8%',
+    },
     'button-text': {
       backgroundColor: 'transparent',
       textColor: '{colors.primary}',
@@ -128,6 +151,12 @@ function buildComponentTokens() {
       padding: '{spacing.sm}',
       height: '40px',
     },
+    'button-text-hover': {
+      backgroundColor: 'transparent',
+      textColor: '{colors.primary}',
+      stateLayer: '{colors.primary}',
+      stateLayerOpacity: '8%',
+    },
     'input-field': {
       backgroundColor: '{colors.surfaceContainerHighest}',
       textColor: '{colors.onSurface}',
@@ -135,14 +164,29 @@ function buildComponentTokens() {
       rounded: '{rounded.xs}',
       padding: '{spacing.md}',
       height: '56px',
+      outlineColor: '{colors.outline}',
+      outlineWidth: '1px',
     },
     'input-field-focused': {
       backgroundColor: '{colors.surfaceContainerHighest}',
       textColor: '{colors.onSurface}',
+      outlineColor: '{colors.primary}',
+      outlineWidth: '2px',
     },
     'input-field-error': {
       backgroundColor: '{colors.surfaceContainerHighest}',
       textColor: '{colors.error}',
+      outlineColor: '{colors.error}',
+      outlineWidth: '2px',
+    },
+    'input-field-disabled': {
+      backgroundColor: '{colors.onSurface}',
+      backgroundOpacity: '4%',
+      textColor: '{colors.onSurface}',
+      textOpacity: '38%',
+      outlineColor: '{colors.onSurface}',
+      outlineOpacity: '12%',
+      outlineWidth: '1px',
     },
     card: {
       backgroundColor: '{colors.surfaceContainerLow}',

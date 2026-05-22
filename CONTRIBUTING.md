@@ -35,7 +35,7 @@ node scripts/generate_design_tokens.js --help
 Sanity check both implementations stay in sync:
 
 ```bash
-# Seed mode should be byte-identical between Python and Node
+# Dark scheme should be byte-identical between Python and Node (any color mode)
 python3 scripts/generate_design_tokens.py \
   --brand-name Test --seed "#38693c" --scheme dark \
   --title-font Inter --body-font Inter > /tmp/py.yaml
@@ -45,7 +45,7 @@ node scripts/generate_design_tokens.js \
 diff /tmp/py.yaml /tmp/js.yaml  # should print nothing
 ```
 
-A note on custom-triplet parity: Python's `materialyoucolor` 3.x ships the newer M3 contrast-curve algorithm; Node's `@material/material-color-utilities` 0.2.x uses the original 2022 algorithm. For seed mode the outputs are identical; for custom-triplet mode they diverge on 4 `on*Container` colors. This is documented in [SKILL.md](./SKILL.md) and is not a bug — but if a future Node release of the upstream package restores parity, a PR closing that gap is welcome.
+A note on runtime parity: Python's `materialyoucolor` 3.x ships the newer M3 contrast-curve algorithm; Node's `@material/material-color-utilities` 0.2.x uses the original 2022 algorithm. For the **dark scheme** the two runtimes are byte-identical regardless of color-input mode. For the **light scheme** they diverge on 4 `on*Container` colors regardless of color-input mode (Python yields lighter, higher-contrast on-container tones; Node yields the strict tone-10 tones). Both are valid M3. This is documented in [SKILL.md](./SKILL.md) and is not a bug — but if a future Node release of the upstream package restores parity, a PR closing that gap is welcome.
 
 ## Where the high-leverage improvements are
 

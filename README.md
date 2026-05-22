@@ -35,7 +35,7 @@ Works with **any** agent that follows the [open SKILL.md convention](https://git
 npx skills add darlanrod/material-design-md
 ```
 
-**I nstall for a specific agent**
+**Install for a specific agent**
 ```bash
 npx skills add darlanrod/material-design-md -a claude-code
 ```
@@ -45,7 +45,7 @@ npx skills add darlanrod/material-design-md -a claude-code
 npx skills add darlanrod/material-design-md --global
 ```
 
-Equivalent CLIs in the same ecosystem also work:
+**Equivalent CLIs in the same ecosystem also work:**
 
 ```bash
 npx add-skill darlanrod/material-design-md
@@ -74,6 +74,34 @@ python3 generate_design_tokens.py --help
 npm install
 node generate_design_tokens.js --help
 ```
+
+---
+
+## Update
+
+If you installed via `npx skills add`, pull the latest version with the `update` command. See the [CHANGELOG](./CHANGELOG.md) for what changed in each release.
+
+```bash
+# Update only this skill
+npx skills update material-design-md
+
+# Update all installed skills at once
+npx skills update
+
+# Restrict to global OR project scope (auto-detected if omitted)
+npx skills update material-design-md -g    # global only
+npx skills update material-design-md -p    # project only
+
+# Non-interactive (CI/CD friendly) — auto-detects scope
+npx skills update material-design-md -y
+```
+
+For other install methods:
+
+- **Drag-and-drop `.skill` (Claude Cowork)** — download the new `material-design-md.skill` from the [Releases page](https://github.com/darlanrod/material-design-md/releases/latest) and drop it in; it replaces the previous version.
+- **Standalone clone** — `cd material-design-md && git pull` (then re-run `pip install -U materialyoucolor` or `npm install` if dependencies bumped).
+
+To remove the skill entirely: `npx skills remove material-design-md`.
 
 ---
 
@@ -146,7 +174,7 @@ The skill is split into two layers — a deliberate separation between determini
 
 **Layer 1 — Deterministic token generation** (`scripts/`)
 
-Python and Node.js implementations of the same generator. Both use the official [Material Color Utilities](https://github.com/material-foundation/material-color-utilities) (the same algorithm Flutter, Android, and Material Web use). For seed mode the two outputs are byte-identical; for custom-triplet mode they differ on four `on*Container` colors due to algorithm vintage (Python's `materialyoucolor` 3.x ships the newer M3 contrast-curve spec; Node's `@material/material-color-utilities` 0.2.x uses the original 2022 algorithm).
+Python and Node.js implementations of the same generator. Both use the official [Material Color Utilities](https://github.com/material-foundation/material-color-utilities) (the same algorithm Flutter, Android, and Material Web use). For the **dark scheme** the two outputs are byte-identical regardless of color-input mode. For the **light scheme** they differ on four `on*Container` colors due to algorithm vintage: Python's `materialyoucolor` 3.x ships the newer M3 contrast-curve spec (lighter, higher-contrast on-container tones), Node's `@material/material-color-utilities` 0.2.x uses the original 2022 algorithm (strict tone-10). Both are valid M3.
 
 **Layer 2 — Agentic prose composition** (`SKILL.md` + `references/`)
 

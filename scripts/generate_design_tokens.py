@@ -166,6 +166,21 @@ TYPE_SCALE: dict[str, TypoLevel] = {
 # DESIGN.md's `{path.to.token}` reference syntax — the agent or downstream
 # tooling can resolve them. This set is intentionally small but covers the
 # most-used interactive surfaces. The skill prose explains how to extend.
+#
+# Interactive-state convention follows Material 3:
+#   - hover/pressed apply a state layer (a translucent overlay of a tinting
+#     color) on top of the base background — emitted as `stateLayer` (color
+#     reference) + `stateLayerOpacity` (percentage). M3 spec: hover = 8%,
+#     pressed = 10%, focus = 10%, dragged = 16%. Downstream consumers
+#     composite state-layer color over the base.
+#   - disabled drops `backgroundOpacity` to 12% and `textOpacity` to 38% on
+#     `onSurface`, the M3-standard "out of play" appearance.
+#   - inputs grow an `outlineColor` + `outlineWidth` on focus and error,
+#     matching the bottom-line / full-outline focus indicators in M3.
+#
+# These extra properties are non-normative per the DESIGN.md spec ("Unknown
+# component property" → accept with warning) but match M3 conventions so any
+# M3-aware downstream tool can apply them.
 def build_component_tokens() -> dict[str, dict[str, str]]:
     return {
         "button-primary": {
@@ -179,14 +194,20 @@ def build_component_tokens() -> dict[str, dict[str, str]]:
         "button-primary-hover": {
             "backgroundColor": "{colors.primary}",
             "textColor": "{colors.onPrimary}",
+            "stateLayer": "{colors.onPrimary}",
+            "stateLayerOpacity": "8%",
         },
         "button-primary-pressed": {
             "backgroundColor": "{colors.primary}",
             "textColor": "{colors.onPrimary}",
+            "stateLayer": "{colors.onPrimary}",
+            "stateLayerOpacity": "10%",
         },
         "button-primary-disabled": {
             "backgroundColor": "{colors.onSurface}",
+            "backgroundOpacity": "12%",
             "textColor": "{colors.onSurface}",
+            "textOpacity": "38%",
         },
         "button-secondary": {
             "backgroundColor": "{colors.secondaryContainer}",
@@ -196,6 +217,12 @@ def build_component_tokens() -> dict[str, dict[str, str]]:
             "padding": "{spacing.md}",
             "height": "40px",
         },
+        "button-secondary-hover": {
+            "backgroundColor": "{colors.secondaryContainer}",
+            "textColor": "{colors.onSecondaryContainer}",
+            "stateLayer": "{colors.onSecondaryContainer}",
+            "stateLayerOpacity": "8%",
+        },
         "button-text": {
             "backgroundColor": "transparent",
             "textColor": "{colors.primary}",
@@ -204,6 +231,12 @@ def build_component_tokens() -> dict[str, dict[str, str]]:
             "padding": "{spacing.sm}",
             "height": "40px",
         },
+        "button-text-hover": {
+            "backgroundColor": "transparent",
+            "textColor": "{colors.primary}",
+            "stateLayer": "{colors.primary}",
+            "stateLayerOpacity": "8%",
+        },
         "input-field": {
             "backgroundColor": "{colors.surfaceContainerHighest}",
             "textColor": "{colors.onSurface}",
@@ -211,14 +244,29 @@ def build_component_tokens() -> dict[str, dict[str, str]]:
             "rounded": "{rounded.xs}",
             "padding": "{spacing.md}",
             "height": "56px",
+            "outlineColor": "{colors.outline}",
+            "outlineWidth": "1px",
         },
         "input-field-focused": {
             "backgroundColor": "{colors.surfaceContainerHighest}",
             "textColor": "{colors.onSurface}",
+            "outlineColor": "{colors.primary}",
+            "outlineWidth": "2px",
         },
         "input-field-error": {
             "backgroundColor": "{colors.surfaceContainerHighest}",
             "textColor": "{colors.error}",
+            "outlineColor": "{colors.error}",
+            "outlineWidth": "2px",
+        },
+        "input-field-disabled": {
+            "backgroundColor": "{colors.onSurface}",
+            "backgroundOpacity": "4%",
+            "textColor": "{colors.onSurface}",
+            "textOpacity": "38%",
+            "outlineColor": "{colors.onSurface}",
+            "outlineOpacity": "12%",
+            "outlineWidth": "1px",
         },
         "card": {
             "backgroundColor": "{colors.surfaceContainerLow}",

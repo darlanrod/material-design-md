@@ -93,19 +93,33 @@ rounded:
 
 ## Components (the `components:` block)
 
-The script emits 13 canonical component tokens, each referencing foundation tokens via `{path.to.token}` syntax. These are intentionally minimal — they cover the most-used interactive surfaces and serve as a *pattern* the consumer can extend.
+The script emits 16 canonical component tokens, each referencing foundation tokens via `{path.to.token}` syntax. These are intentionally minimal — they cover the most-used interactive surfaces and serve as a *pattern* the consumer can extend.
 
 | Component | Notes |
 |---|---|
 | `button-primary` (+ `-hover`, `-pressed`, `-disabled`) | Filled button, primary container, pill shape. |
-| `button-secondary` | Tonal button — secondary container, also pill. |
-| `button-text` | Transparent, primary-colored label. |
-| `input-field` (+ `-focused`, `-error`) | Filled text field on `surfaceContainerHighest`, slight rounding. |
+| `button-secondary` (+ `-hover`) | Tonal button — secondary container, also pill. |
+| `button-text` (+ `-hover`) | Transparent, primary-colored label. |
+| `input-field` (+ `-focused`, `-error`, `-disabled`) | Filled text field on `surfaceContainerHighest`, slight rounding. |
 | `card` | `surfaceContainerLow`, medium rounding. |
 | `chip` (+ `-selected`) | Compact, `label-large`, smaller rounding. |
 | `tooltip` | Inverse surface, body-small text. |
 
 **Variants follow the `name-state` convention** the DESIGN.md spec recommends (e.g., `button-primary-hover`). The consumer is expected to apply each base + its variants together.
+
+### Interactive state properties (non-normative)
+
+The DESIGN.md spec defines a small set of standard component properties (`backgroundColor`, `textColor`, `typography`, `rounded`, `padding`, `size`, `height`, `width`) and says unknown properties are accepted with warning. This skill emits **five additional non-normative properties** to encode M3 interactive states faithfully:
+
+| Property | Value type | Purpose |
+|---|---|---|
+| `stateLayer` | Color reference | The tinting color composited over `backgroundColor` to indicate hover/pressed/focus. |
+| `stateLayerOpacity` | Percentage string (e.g. `"8%"`) | The opacity at which `stateLayer` is composited. M3 conventions: hover = 8%, pressed = 10%, focus = 10%, dragged = 16%. |
+| `backgroundOpacity` | Percentage string | Opacity applied to `backgroundColor`. Used in disabled states (M3 default: 12% for buttons, 4% for input fields). |
+| `textOpacity` | Percentage string | Opacity applied to `textColor`. Used in disabled states (M3 default: 38%). |
+| `outlineColor` / `outlineWidth` / `outlineOpacity` | Color / dimension / percentage | Input-field border treatment. M3 conventions: enabled = `outline` 1px, focused = `primary` 2px, error = `error` 2px, disabled = `onSurface` 1px at 12% opacity. |
+
+A consumer that doesn't understand these properties will fall back to the base color values and still render a usable (if state-blind) UI. A consumer that does understand them produces an M3-faithful result.
 
 **When to extend:** if the brand needs domain-specific components (e.g., `alert-warning`, `bottom-sheet`, `nav-rail`), add them to the YAML during composition. Reference foundation tokens — never inline hex codes — to keep the system internally consistent.
 

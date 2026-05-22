@@ -154,12 +154,18 @@ components:
   button-primary-hover:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.onPrimary}"
+    stateLayer: "{colors.onPrimary}"
+    stateLayerOpacity: "8%"
   button-primary-pressed:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.onPrimary}"
+    stateLayer: "{colors.onPrimary}"
+    stateLayerOpacity: "10%"
   button-primary-disabled:
     backgroundColor: "{colors.onSurface}"
+    backgroundOpacity: "12%"
     textColor: "{colors.onSurface}"
+    textOpacity: "38%"
   button-secondary:
     backgroundColor: "{colors.secondaryContainer}"
     textColor: "{colors.onSecondaryContainer}"
@@ -167,6 +173,11 @@ components:
     rounded: "{rounded.full}"
     padding: "{spacing.md}"
     height: "40px"
+  button-secondary-hover:
+    backgroundColor: "{colors.secondaryContainer}"
+    textColor: "{colors.onSecondaryContainer}"
+    stateLayer: "{colors.onSecondaryContainer}"
+    stateLayerOpacity: "8%"
   button-text:
     backgroundColor: "transparent"
     textColor: "{colors.primary}"
@@ -174,6 +185,11 @@ components:
     rounded: "{rounded.full}"
     padding: "{spacing.sm}"
     height: "40px"
+  button-text-hover:
+    backgroundColor: "transparent"
+    textColor: "{colors.primary}"
+    stateLayer: "{colors.primary}"
+    stateLayerOpacity: "8%"
   input-field:
     backgroundColor: "{colors.surfaceContainerHighest}"
     textColor: "{colors.onSurface}"
@@ -181,12 +197,26 @@ components:
     rounded: "{rounded.xs}"
     padding: "{spacing.md}"
     height: "56px"
+    outlineColor: "{colors.outline}"
+    outlineWidth: "1px"
   input-field-focused:
     backgroundColor: "{colors.surfaceContainerHighest}"
     textColor: "{colors.onSurface}"
+    outlineColor: "{colors.primary}"
+    outlineWidth: "2px"
   input-field-error:
     backgroundColor: "{colors.surfaceContainerHighest}"
     textColor: "{colors.error}"
+    outlineColor: "{colors.error}"
+    outlineWidth: "2px"
+  input-field-disabled:
+    backgroundColor: "{colors.onSurface}"
+    backgroundOpacity: "4%"
+    textColor: "{colors.onSurface}"
+    textOpacity: "38%"
+    outlineColor: "{colors.onSurface}"
+    outlineOpacity: "12%"
+    outlineWidth: "1px"
   card:
     backgroundColor: "{colors.surfaceContainerLow}"
     textColor: "{colors.onSurface}"
