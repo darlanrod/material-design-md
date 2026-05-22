@@ -1,0 +1,33 @@
+{
+  "name": "material-design-md-tokens",
+  "version": "1.0.0",
+  "description": "Deterministic Material Design 3 token generator for the YAML frontmatter of a DESIGN.md file. Part of the material-design-md skill.",
+  "private": true,
+  "bin": {
+    "design-md-tokens": "./generate_design_tokens.js"
+  },
+  "scripts": {
+    "tokens": "node generate_design_tokens.js"
+  },
+  "dependencies": {
+    "@material/material-color-utilities": "0.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MPL-2.0",
+  "author": "Darlan Rod <darlan@rodot.dev>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darlanrod/material-design-md.git",
+    "directory": "scripts"
+  },
+  "keywords": [
+    "material-design-3",
+    "material-you",
+    "design-tokens",
+    "design-md",
+    "design-system",
+    "m3"
+  ]
+}
